@@ -1,7 +1,9 @@
 This package is for providing pocketbase JS SDK for CommonJS. Frameworks such as Remix (currently at v1.14.3) work with CommonJS. If you would like to use Pocketbase with Remix https://remix.run/docs/en/main, you can use this SDK.
 
 Add the following to your package.json file (under dependencies):
+```
 "pocketbase": "https://github.com/rajeshg/pocketbase-js-sdk-commonjs.git#master",
+```
 
 PocketBase JavaScript SDK
 ======================================================================
