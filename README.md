@@ -625,7 +625,6 @@ const pb = new PocketBase(baseUrl = '/', authStore = LocalAuthStore);
 | `pb.autoCancellation(enable)`                     | Globally enable or disable auto cancellation for pending duplicated requests. |
 | `pb.cancelAllRequests()`                          | Cancels all pending requests.                                                 |
 | `pb.cancelRequest(cancelKey)`                     | Cancels single request by its cancellation token key.                         |
-| `pb.getFileUrl(record, filename, reqConfig = {})` | Builds and returns an absolute record file url for the provided filename.     |
 | `pb.buildUrl(path, reqConfig = {})`               | Builds a full client url by safely concatenating the provided path.           |
 
 
@@ -689,8 +688,11 @@ const pb = new PocketBase(baseUrl = '/', authStore = LocalAuthStore);
 // Authenticates a record with their username/email and password.
 🔓 pb.collection(collectionIdOrName).authWithPassword(usernameOrEmail, password, bodyParams = {}, queryParams = {});
 
-// Authenticates a record with OAuth2 client provider.
-🔓 pb.collection(collectionIdOrName).authWithOAuth2(provider, code, codeVerifier, redirectUrl, createData = {}, bodyParams = {}, queryParams = {});
+// Authenticates a record with OAuth2 provider without custom redirects, deeplinks or even page reload.
+🔓 pb.collection(collectionIdOrName).authWithOAuth2(authConfig);
+
+// Authenticates a record with OAuth2 code.
+🔓 pb.collection(collectionIdOrName).authWithOAuth2Code(provider, code, codeVerifier, redirectUrl, createData = {}, bodyParams = {}, queryParams = {});
 
 // Refreshes the current authenticated record model and auth token.
 🔐 pb.collection(collectionIdOrName).authRefresh(bodyParams = {}, queryParams = {});
@@ -718,6 +720,18 @@ const pb = new PocketBase(baseUrl = '/', authStore = LocalAuthStore);
 
 // Unlinks a single external auth provider relation from the specified record.
 🔐 pb.collection(collectionIdOrName).unlinkExternalAuth(recordId, provider, queryParams = {});
+```
+
+---
+
+##### FileService
+
+```js
+// Builds and returns an absolute record file url for the provided filename.
+🔓 pb.files.getUrl(record, filename, queryParams = {});
+
+// Requests a new private file access token for the current auth model (admin or record).
+🔐 pb.files.getToken(queryParams = {});
 ```
 
 ---

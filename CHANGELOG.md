@@ -1,3 +1,41 @@
+## 0.14.0
+
+- Added simplified `authWithOAuth2()` version without having to implement custom redirect, deeplink or even page reload:
+    ```js
+    const authData = await pb.collection('users').authWithOAuth2({
+      provider: 'google'
+    })
+    ```
+
+    Works with PocketBase v0.15.0+.
+
+    This method initializes a one-off realtime subscription and will
+    open a popup window with the OAuth2 vendor page to authenticate.
+    Once the external OAuth2 sign-in/sign-up flow is completed, the popup
+    window will be automatically closed and the OAuth2 data sent back
+    to the user through the previously established realtime connection.
+
+    _Site-note_: when creating the OAuth2 app in the provider dashboard
+    you have to configure `https://yourdomain.com/api/oauth2-redirect`
+    as redirect URL.
+
+    _The "manual" code exchange flow is still supported as `authWithOAuth2Code(provider, code, codeVerifier, redirectUrl)`._
+
+    _For backward compatibility it is also available as soft-deprecated function overload of `authWithOAuth2(provider, code, codeVerifier, redirectUrl)`._
+
+- Added new `pb.files` service:
+    ```js
+    // Builds and returns an absolute record file url for the provided filename.
+    🔓 pb.files.getUrl(record, filename, queryParams = {});
+
+    // Requests a new private file access token for the current auth model (admin or record).
+    🔐 pb.files.getToken(queryParams = {});
+    ```
+    _`pb.getFileUrl()` is soft-deprecated and acts as alias calling `pb.files.getUrl()` under the hood._
+
+    Works with PocketBase v0.15.0+.
+
+
 ## 0.13.1
 
 - Added option to specify a generic `send()` return type and defined `SendOptions` type ([#171](https://github.com/pocketbase/js-sdk/pull/171); thanks @iamelevich).

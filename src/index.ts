@@ -1,7 +1,7 @@
 import Client, {
     SendOptions,
     BeforeSendResult,
-} from '@/Client';
+}                          from '@/Client';
 import ClientResponseError from '@/ClientResponseError';
 import ExternalAuth        from '@/models/ExternalAuth';
 import Admin               from '@/models/Admin';
@@ -19,7 +19,10 @@ import RealtimeService     from '@/services/RealtimeService';
 import RecordService       from '@/services/RecordService';
 import SettingsService     from '@/services/SettingsService';
 import LocalAuthStore      from '@/stores/LocalAuthStore';
-import { getTokenPayload } from '@/stores/utils/jwt';
+import {
+    getTokenPayload,
+    isTokenExpired,
+} from '@/stores/utils/jwt';
 import BaseAuthStore, {
     OnStoreChangeFunc,
 } from '@/stores/BaseAuthStore';
@@ -28,6 +31,8 @@ import {
     AuthProviderInfo,
     AuthMethodsList,
     RecordSubscription,
+    OAuth2UrlCallback,
+    OAuth2AuthConfig,
 } from '@/services/RecordService';
 import { UnsubscribeFunc } from '@/services/RealtimeService';
 import {
@@ -46,6 +51,7 @@ export {
     BaseAuthStore,
     LocalAuthStore,
     getTokenPayload,
+    isTokenExpired,
     ExternalAuth,
     Admin,
     Collection,
@@ -71,6 +77,8 @@ export {
     AuthProviderInfo,
     AuthMethodsList,
     RecordSubscription,
+    OAuth2UrlCallback,
+    OAuth2AuthConfig,
     OnStoreChangeFunc,
     UnsubscribeFunc,
     BaseQueryParams,
